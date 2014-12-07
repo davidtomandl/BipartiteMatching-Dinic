@@ -55,7 +55,7 @@ public:
 	
 	//Adds bidirectional edge; {u,v}
 	void addEdge(int u, int v); 
-	//Returns maximum matching
+	//Returns maximum bipartite matching
 	edgeList MaximumMatching();
 	//initialization
 	void init();
