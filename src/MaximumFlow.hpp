@@ -8,15 +8,6 @@
 #include <algorithm>
 #include <climits>
 
-
-class Edge {
-public:
-	Edge(int to,double capacity,double flow):to(to),capacity(capacity),flow(flow){};
-	int to;
-    double capacity,flow; 
-	
-};
-
 //Class for computing the maximum flow in a flow network using Dinic's algorithm.
 class MaximumFlow
 {
@@ -24,45 +15,53 @@ private:
 	typedef std::vector<std::vector<Edge> > flow_network;//adjacency list
 	typedef std::vector<Edge> edgeVector;
 public:	
-	MaximumFlow(int n,int source, int target):n_vertices_(n),source_(source),target_(target){net_.resize(n_vertices_);}
+	MaximumFlow(size_t n,size_t source, size_t target):n_vertices_(n),source_(source),target_(target){net_.resize(n_vertices_);}
 	MaximumFlow(){}
 	~MaximumFlow(){}
-	void setSource(int s){source_=s;}
-	void setTarget(int t){target_=t;}
-	void setNumberOfVertices(int n){n_vertices_=n;}
+	void setSource(size_t s){source_=s;}
+	void setTarget(size_t t){target_=t;}
+	void setNumberOfVertices(size_t n){n_vertices_=n;}
 	
 	void setNetwork(double const *const *capacity);
 
 	// Adds directional edge with a capacity; from->to
-	void addEdge(int from, int to, double capacity); 
+	void addEdge(size_t from, size_t to, double capacity); 
 	//finds the maximum flow in the given flow network
 	//return adjacency list with flow
 	flow_network Dinic();
 
 	
 private:
-	int source_,target_;
-	int n_vertices_; 
+	size_t source_,target_;
+	size_t n_vertices_; 
 	flow_network net_;
-	//length of the shortest path in the flow network from the source to the target. 
+	//length of the shortest path in the flow network from the source to the target
 	//Returns if the target is reachable from the source. 
 	//Sets parameters "length" to the length of this path.
-	bool shortestPath(int & lenght,flow_network& lNet);
+	bool shortestPath(size_t & lenght,flow_network& lNet);
 	//constructs the layered network based on the given residual network
 	void layeredNetwork(flow_network &);
 	//constructs the residual network based on the given flow network
 	void residualNetwork(flow_network &);
 	//adds flow f to the current flow; (f+f')(x,y)=f(x,y)+f'(x,y)
 	void addFlow(const flow_network & f);
-	//
+	//finds blocking flow
 	void blockingFlow(flow_network & );
 
-	void init(flow_network& fNet,std::vector<int>& path);
-	void forward(flow_network& fNet,std::vector<int>& path);
-	void backward(flow_network& fNet,std::vector<int>& path);
-	void increase(flow_network& fNet,std::vector<int>& path);
+	void init(flow_network& fNet,std::vector<size_t>& path);
+	void forward(flow_network& fNet,std::vector<size_t>& path);
+	void backward(flow_network& fNet,std::vector<size_t>& path);
+	void increase(flow_network& fNet,std::vector<size_t>& path);
 	
 	edgeVector::iterator findEdge(size_t u,size_t v,flow_network &fNet);
+};
+
+class Edge {
+public:
+	Edge(size_t to,double capacity,double flow):to(to),capacity(capacity),flow(flow){};
+	int to;
+    double capacity,flow; 
+	
 };
 
 class Array2{
