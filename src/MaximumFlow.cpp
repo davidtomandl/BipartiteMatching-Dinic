@@ -4,12 +4,7 @@ void MaximumFlow::addEdge(size_t from, size_t to, double capacity){
 	net_[from].push_back(Edge(to,capacity,0));
 };
 
-void MaximumFlow::setNetwork(double const* const* capacity){	
-	for (size_t i = 0; i < n_vertices_; i++)
-        for (size_t j = 0; j < n_vertices_; j++)
-            if (capacity[i][j] != 0)
-                addEdge(i, j, capacity[i][j]);
-}
+
 MaximumFlow::flow_network MaximumFlow::Dinic(){
 	size_t l=0;
 	flow_network R=net_;
@@ -265,4 +260,11 @@ MaximumFlow::edgeVector::iterator MaximumFlow::findEdge(size_t u,size_t v, flow_
 			++it;
 	}
 	return it;
+}
+
+void MaximumFlow::setNetwork(double const* const* capacity){	
+	for (size_t i = 0; i < n_vertices_; i++)
+        for (size_t j = 0; j < n_vertices_; j++)
+            if (capacity[i][j] != 0)
+                addEdge(i, j, capacity[i][j]);
 }
