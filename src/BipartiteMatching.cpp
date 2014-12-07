@@ -9,15 +9,15 @@ BipartiteMatching::edgeList BipartiteMatching::MaximumMatching()
 	MaximumFlow mf(n_vertices_+2,n_vertices_,n_vertices_+1);
 
 	//create flow network
-	for (int i = 0; i < n_vertices_; i++)
-		for (int j = i+1; j < n_vertices_; j++)
+	for (size_t i = 0; i < n_vertices_; i++)
+		for (size_t j = i+1; j < n_vertices_; j++)
 			if (graph_.at(i,j)!=0)			
 				if (partite_[i]==0)
 					mf.addEdge(i,j,1);
 				else
 					mf.addEdge(j,i,1);
 
-	for (int i = 0; i < n_vertices_; i++)		
+	for (size_t i = 0; i < n_vertices_; i++)		
 		if (partite_[i]==0) 
 			mf.addEdge(n_vertices_,i,1); //source->i, left partite
 		else
@@ -25,7 +25,7 @@ BipartiteMatching::edgeList BipartiteMatching::MaximumMatching()
 
 	//find maximum flow 
 	std::vector<std::vector<Edge> > flow=mf.Dinic();
-	int i=0;
+	size_t i=0;
 	matching_.clear();
 	for (auto it=flow.cbegin();it!=flow.cend(); ++it)
 	{
@@ -52,9 +52,9 @@ void BipartiteMatching::readGraphBipartite(std::istream& stream)
 	init();
 	
 
-	for (int i = 0; i < m; i++)
+	for (size_t i = 0; i < m; i++)
 	{
-		for (int j = 0; j < n; ++j) 
+		for (size_t j = 0; j < n; ++j) 
 		{
 			stream >> temp;
 			graph_.set(i,m+j,temp);
@@ -89,9 +89,9 @@ void BipartiteMatching::readGraphMatrix(std::istream& stream)
 		throw "Failed to read the number of vertices!";
 	init();
 	
-	int temp;
-    for (int i = 0; i < n_vertices_; ++i) 
-		for (int j = 0; j < n_vertices_; ++j) 
+	size_t temp;
+    for (size_t i = 0; i < n_vertices_; ++i) 
+		for (size_t j = 0; j < n_vertices_; ++j) 
 		{
 			stream >> temp;
 			graph_.set(i,j,temp);
@@ -104,15 +104,15 @@ void BipartiteMatching::init()
 	graph_.init(n_vertices_, n_vertices_);
 	partite_.clear();
 	partite_.resize(n_vertices_);
-	for (int i = 0; i < n_vertices_; i++)
-		for (int j = 0; j < n_vertices_; j++)
+	for (size_t i = 0; i < n_vertices_; i++)
+		for (size_t j = 0; j < n_vertices_; j++)
 		  graph_.set(i,j,0);
-	for (int i = 0; i < n_vertices_; ++i) partite_[i]=-1; //-1 -> unused vertex
+	for (size_t i = 0; i < n_vertices_; ++i) partite_[i]=-1; //-1 -> unused vertex
 }
 
 bool BipartiteMatching::setPartite()
 {
-	std::queue <int> q;//FIFO of vertex numbers
+	std::queue <size_t> q;//FIFO of vertex numbers
     q.push(0);
 	partite_[0]=0;
 
@@ -132,7 +132,7 @@ bool BipartiteMatching::setPartite()
                 return false;
 		}
 		if (q.empty())
-			for (int i = 0; i <n_vertices_; i++)
+			for (size_t i = 0; i <n_vertices_; i++)
 				if (partite_[i]==-1)
 				{
 					q.push(i);
@@ -142,7 +142,7 @@ bool BipartiteMatching::setPartite()
 	}
 	return true;
 }
-void BipartiteMatching::addEdge(int u, int v)
+void BipartiteMatching::addEdge(size_t u, size_t v)
 {
 	graph_.set(u,v,1);
 	graph_.set(v,u,1);
@@ -160,8 +160,7 @@ size_t BipartiteMatching::size()
 short BipartiteMatching::perfect()
 {
 	size_t l,r; l=0;r=0;
-	size_t u,v;
-	for (int i = 0; i < n_vertices_; i++)
+	for (size_t i = 0; i < n_vertices_; i++)
 		if (partite_[i]==0) l++; else r++;
 	for(auto it=matching_.cbegin();it!=matching_.cend();++it)
 	{
