@@ -8,6 +8,14 @@
 #include <algorithm>
 #include <climits>
 
+class Edge {
+public:
+	Edge(size_t to,double capacity,double flow):to(to),capacity(capacity),flow(flow){};
+	size_t to;
+    double capacity,flow; 
+	
+};
+
 //Class for computing the maximum flow in a flow network using Dinic's algorithm.
 class MaximumFlow
 {
@@ -56,13 +64,7 @@ private:
 	edgeVector::iterator findEdge(size_t u,size_t v,flow_network &fNet);
 };
 
-class Edge {
-public:
-	Edge(size_t to,double capacity,double flow):to(to),capacity(capacity),flow(flow){};
-	int to;
-    double capacity,flow; 
-	
-};
+
 
 class Array2{
  public:
