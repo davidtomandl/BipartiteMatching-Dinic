@@ -35,7 +35,7 @@ public:
 	// Adds directional edge with a capacity; from->to
 	void addEdge(size_t from, size_t to, double capacity); 
 	//finds the maximum flow in the given flow network
-	//return adjacency list with flow
+	//returns adjacency list with flow
 	flow_network Dinic();
 
 	
