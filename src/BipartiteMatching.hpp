@@ -54,7 +54,7 @@ public:
 	~BipartiteMatching(){};
 	
 	//Adds bidirectional edge; {u,v}
-	void addEdge(int u, int v); 
+	void addEdge(size_t u, size_t v); 
 	//Returns maximum bipartite matching
 	edgeList MaximumMatching();
 	//initialization
@@ -75,7 +75,7 @@ public:
 	size_t size();
 	//returns 1 -> pefect matching, 2->left-perfect matching, 3->right-perfect matching, 0->otherwise
 	short perfect();
-	void setNumberOfVertices(int n){n_vertices_=n;}
+	void setNumberOfVertices(size_t n){n_vertices_=n;}
 
 
 private:
