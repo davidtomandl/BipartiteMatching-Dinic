@@ -1,17 +1,17 @@
 #include "MaximumFlow.hpp"
 
-void MaximumFlow::addEdge(int from, int to, double capacity){
+void MaximumFlow::addEdge(size_t from, size_t to, double capacity){
 	net_[from].push_back(Edge(to,capacity,0));
 };
 
 void MaximumFlow::setNetwork(double const* const* capacity){	
-	for (int i = 0; i < n_vertices_; i++)
-        for (int j = 0; j < n_vertices_; j++)
+	for (size_t i = 0; i < n_vertices_; i++)
+        for (size_t j = 0; j < n_vertices_; j++)
             if (capacity[i][j] != 0)
                 addEdge(i, j, capacity[i][j]);
 }
 MaximumFlow::flow_network MaximumFlow::Dinic(){
-	int l=0;
+	size_t l=0;
 	flow_network R=net_;
 	while (true)
 	{
@@ -26,24 +26,24 @@ MaximumFlow::flow_network MaximumFlow::Dinic(){
 }
 void MaximumFlow::blockingFlow(flow_network & fNet)
 {
-	std::vector<int> path;
+	std::vector<size_t> path;
 	init(fNet,path);
 }
-void MaximumFlow::init(flow_network& fNet,std::vector<int>& path)
+void MaximumFlow::init(flow_network& fNet,std::vector<size_t>& path)
 {
 	path.clear();
 	path.push_back(source_);
 	forward(fNet,path);
 }
 
-void MaximumFlow::forward(flow_network& fNet,std::vector<int>& path)
+void MaximumFlow::forward(flow_network& fNet,std::vector<size_t>& path)
 {
-	int x=path.back();
+	size_t x=path.back();
 	if (fNet[x].size()==0) 
 		backward(fNet,path);
 	else
 	{
-		int y=fNet[x][0].to;
+		size_t y=fNet[x][0].to;
 		path.push_back(y);
 		x=y;
 		if (y!=target_) forward(fNet,path);
@@ -51,14 +51,14 @@ void MaximumFlow::forward(flow_network& fNet,std::vector<int>& path)
 	}
 }
 
-void MaximumFlow::backward(flow_network& fNet,std::vector<int>& path)
+void MaximumFlow::backward(flow_network& fNet,std::vector<size_t>& path)
 {
-	int x=path.back();
+	size_t x=path.back();
 	if (x!=source_) 
 	{
 		//Let (v,x) is the last edge in path.
 		path.pop_back(); //remove x from path
-		int v=path.back();
+		size_t v=path.back();
 		//remove edge (v,x) from the layered network
 		if (fNet[v].size()==1) 
 			fNet[v].clear();
@@ -72,13 +72,13 @@ void MaximumFlow::backward(flow_network& fNet,std::vector<int>& path)
 	}
 }
 
-void MaximumFlow::increase(flow_network &fNet,std::vector<int>& path)
+void MaximumFlow::increase(flow_network &fNet,std::vector<size_t>& path)
 {
 	double d=INT_MAX;
-	int x,y;
-	int size=path.size();
+	size_t x,y;
+	size_t size=path.size();
 	//residual capacity; d is minimum on the path
-	for (int i = 1; i < size; i++)
+	for (size_t i = 1; i < size; i++)
 	{
 		x=path[i-1];
 		y=path[i];
@@ -118,10 +118,10 @@ void MaximumFlow::increase(flow_network &fNet,std::vector<int>& path)
 
 void MaximumFlow::addFlow(const flow_network & f )
 {
-	int i=0;
+	size_t i=0;
 	for (flow_network::const_iterator it=net_.begin();it!=net_.end(); ++it)
 	{
-		int j=0;
+		size_t j=0;
 		for (edgeVector::const_iterator it1=f[i].begin();it1!=f[i].end(); ++it1)
 		{
 			net_[i][j].flow=f[i][j].flow+net_[i][j].flow;			
@@ -133,11 +133,11 @@ void MaximumFlow::addFlow(const flow_network & f )
 }
 void MaximumFlow::residualNetwork(flow_network& fNet)
 {
-	int i=0;
+	size_t i=0;
 	for (flow_network::const_iterator it=net_.begin();it!=net_.end(); ++it)
 	{
-		int j=0;
-		int k=0;
+		size_t j=0;
+		size_t k=0;
 		if (net_[i].size()>0)
 		{
 			const edgeVector copyVector = net_[i];
@@ -145,7 +145,7 @@ void MaximumFlow::residualNetwork(flow_network& fNet)
 			{
 				double f=net_[i][j].flow;
 				double c=net_[i][j].capacity;
-				int v=net_[i][j].to;				
+				size_t v=net_[i][j].to;				
 				if (fNet[i].size()>k)
 					fNet[i][k].flow=c-f;
 				else
@@ -176,14 +176,14 @@ void MaximumFlow::residualNetwork(flow_network& fNet)
 }
 void MaximumFlow::layeredNetwork(flow_network& fNet)
 {
-	std::queue<int> fifo; 
+	std::queue<size_t> fifo; 
 	std::vector<short> color;//each vertex has color:0-unused,1-processing,2-used
-	std::vector<int> layer; 	
+	std::vector<size_t> layer; 	
 	//sets all vetices to unused
 	std::for_each(fNet.cbegin(), fNet.cend(), [&color](const edgeVector&){color.push_back(false);});
 	layer.resize(color.size());
 	fifo.push(source_);
-	int u; //temp: vertex
+	size_t u; //temp: vertex
 	bool find=false;
 	while (!fifo.empty()){
 		u=fifo.front();
@@ -210,7 +210,7 @@ void MaximumFlow::layeredNetwork(flow_network& fNet)
 		color[u]=2;		
 	}
 	
-	int i=0;
+	size_t i=0;
 	//remove unreachable vertices
 	for (flow_network::const_iterator it=fNet.begin();it!=fNet.end(); ++it)
 	{
@@ -222,16 +222,16 @@ void MaximumFlow::layeredNetwork(flow_network& fNet)
 	}
 }
 
-bool MaximumFlow::shortestPath(int &length,flow_network& fNet)
+bool MaximumFlow::shortestPath(size_t &length,flow_network& fNet)
 {
-	std::queue<int> fifo; 
-	typedef std::pair <bool,int> vertex;//used;distance
+	std::queue<size_t> fifo; 
+	typedef std::pair <bool,size_t> vertex;//used;distance
 	std::vector<vertex> vertices; 
 	//for each vertex do:  unused, distance=0
 	std::for_each(fNet.cbegin(), fNet.cend(), [&vertices](const edgeVector&){vertices.push_back(vertex(false,0));});
 
 	fifo.push(source_);
-	int u; //vertex
+	size_t u; //vertex
 	bool find=false;
 		
 	while (!fifo.empty()){
@@ -239,7 +239,7 @@ bool MaximumFlow::shortestPath(int &length,flow_network& fNet)
 		fifo.pop();
 		for (edgeVector::const_iterator it=fNet[u].begin();it!=fNet[u].end(); ++it)
 		{
-			int v=it->to;
+			size_t v=it->to;
 			if (!vertices[v].first)
 			{ 
 				fifo.push(v);
