@@ -25,8 +25,6 @@ int main(int argc, char** argv){
 			cout << "Graph has right-perfet matching."<<endl;
 			break;
 
-		default:
-			break;
 	}
 	cout << endl;
 
@@ -47,8 +45,6 @@ int main(int argc, char** argv){
 			cout << "Graph has right-perfet matching."<<endl;
 			break;
 
-		default:
-			break;
 	}
 	
 	cout << endl;
@@ -69,9 +65,6 @@ int main(int argc, char** argv){
 		case 3: 
 			cout << "Graph has right-perfet matching."<<endl;
 			break;
-
-		default:
-			break;
 	}
 	
 	cout << endl;
@@ -81,6 +74,6 @@ int main(int argc, char** argv){
 	ifs3.close();
 	cout << "press enter to exit..."<<endl;
 	getchar();	
-
+	
 	return 0;
 };
