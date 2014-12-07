@@ -85,7 +85,7 @@ void MaximumFlow::increase(flow_network &fNet,std::vector<size_t>& path)
 		edgeVector::iterator it=findEdge(x,y,fNet/*net_*/);
 		if (it->flow<d) d=it->flow;
 	}
-	for (int i = 1; i < size;i++)
+	for (size_t i = 1; i < size;i++)
 	{
 		x=path[i-1];
 		y=path[i];		
