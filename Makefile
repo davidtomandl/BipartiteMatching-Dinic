@@ -2,19 +2,19 @@ CC=g++
 
 CFLAGS=-c -Wall
 
-all: start
+all: BipartiteMatching
 
-start: main.o BipartiteMatching.o
-	$(CC) main.o BipartiteMatching.o -o start
+matching: main.o BipartiteMatching.o MaxumumFlow.o
+	$(CC) main.o BipartiteMatching.o MaximumFlow.o -o matching
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+main.o: main.cpp BipartiteMatching.hpp
+	$(CC) $(CFLAGS) main.cpp -o main.o
 
-BipartiteMatching.o: BipartiteMatching.cpp MaxumumFlow.o
-	$(CC) $(CFLAGS) BipartiteMatching.cpp BipartiteMatching.hpp MaxumumFlow.o
+BipartiteMatching.o: BipartiteMatching.cpp BipartiteMatching.hpp MaximumFlow.hpp
+	$(CC) $(CFLAGS) BipartiteMatching.cpp -o BipartiteMatching.o
 
-MaxumumFlow.o: MaxumumFlow.cpp MaxumumFlow.hpp
-	$(CC) $(CFLAGS) MaxumumFlow.cpp MaxumumFlow.hpp
+MaximumFlow.o: MaximumFlow.cpp MaximumFlow.hpp
+	$(CC) $(CFLAGS) MaximumFlow.cpp -o MaximumFlow.o
 
 clean:
 	rm -rf *o start
