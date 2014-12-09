@@ -157,7 +157,7 @@ size_t BipartiteMatching::size()
 {
 	return matching_.size();
 }
-short BipartiteMatching::perfect()
+short BipartiteMatching::isPerfect()
 {
 	size_t l,r; l=0;r=0;
 	for (size_t i = 0; i < n_vertices_; i++)
@@ -167,9 +167,9 @@ short BipartiteMatching::perfect()
 		l--;
 		r--;		
 	}
-	if ((r==0) && (l==0)) return 1;
-	else if (l==0) return 2;
-	else if (r==0) return 3;
+	if ((r==0) && (l==0)) return perfet_matching;
+	else if (l==0) return left_perfet_matching;
+	else if (r==0) return right_perfet_matching;
 	else return 0;
 
 }
