@@ -42,6 +42,10 @@
 #include <iostream>
 #include <fstream>
 
+#define perfet_matching 1
+#define left_perfet_matching 2
+#define right_perfet_matching 3
+
 //finding maximum matching in a bipartite graph
 class BipartiteMatching
 {
@@ -74,7 +78,7 @@ public:
 	//returns the number of edges in the matching
 	size_t size();
 	//returns 1 -> pefect matching, 2->left-perfect matching, 3->right-perfect matching, 0->otherwise
-	short perfect();
+	short isPerfect();
 	void setNumberOfVertices(size_t n){n_vertices_=n;}
 
 
