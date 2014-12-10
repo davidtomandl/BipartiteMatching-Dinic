@@ -4,12 +4,7 @@ void MaximumFlow::addEdge(size_t from, size_t to, double capacity){
 	net_[from].push_back(Edge(to,capacity,0));
 };
 
-void MaximumFlow::setNetwork(double const* const* capacity){	
-	for (size_t i = 0; i < n_vertices_; i++)
-        for (size_t j = 0; j < n_vertices_; j++)
-            if (capacity[i][j] != 0)
-                addEdge(i, j, capacity[i][j]);
-}
+
 MaximumFlow::flow_network MaximumFlow::Dinic(){
 	size_t l=0;
 	flow_network R=net_;
@@ -107,7 +102,6 @@ void MaximumFlow::increase(flow_network &fNet,std::vector<size_t>& path)
 				fNet[x].clear();
 			else
 			{
-				//edgeVector::iterator it=findEdge(x,y,fNet);
 				if (it1!=fNet[x].end())
 					fNet[x].erase(it1);
 			}
@@ -159,9 +153,9 @@ void MaximumFlow::residualNetwork(flow_network& fNet)
 						fNet[i].clear();
 					else
 					{
-						edgeVector::iterator it=findEdge(i,v,fNet);
-						if (it!=fNet[i].end())
-							fNet[i].erase(it);
+						edgeVector::iterator it1=findEdge(i,v,fNet);
+						if (it1!=fNet[i].end())
+							fNet[i].erase(it1);
 					}
 					k--;
 				}
@@ -265,4 +259,11 @@ MaximumFlow::edgeVector::iterator MaximumFlow::findEdge(size_t u,size_t v, flow_
 			++it;
 	}
 	return it;
+}
+
+void MaximumFlow::setNetwork(double const* const* capacity){	
+	for (size_t i = 0; i < n_vertices_; i++)
+        for (size_t j = 0; j < n_vertices_; j++)
+            if (capacity[i][j] != 0)
+                addEdge(i, j, capacity[i][j]);
 }

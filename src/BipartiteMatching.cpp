@@ -74,7 +74,7 @@ void BipartiteMatching::readGraphList(std::istream& stream)
 	init();
 	size_t u,v;
 	while(!stream.eof())
-    {
+        {
 		stream >> u >> v;
 		graph_.set(u,v,1);
 		graph_.set(v,u,1);
@@ -90,7 +90,7 @@ void BipartiteMatching::readGraphMatrix(std::istream& stream)
 	init();
 	
 	size_t temp;
-    for (size_t i = 0; i < n_vertices_; ++i) 
+        for (size_t i = 0; i < n_vertices_; ++i) 
 		for (size_t j = 0; j < n_vertices_; ++j) 
 		{
 			stream >> temp;
@@ -113,23 +113,23 @@ void BipartiteMatching::init()
 bool BipartiteMatching::setPartite()
 {
 	std::queue <size_t> q;//FIFO of vertex numbers
-    q.push(0);
+        q.push(0);
 	partite_[0]=0;
 
 	while (!q.empty())
-    {
-		size_t u = q.front();
-        q.pop();
-		// Find all unused adjacent vertices
-        for (size_t v = 0; v < n_vertices_; v++)
         {
+		size_t u = q.front();
+                q.pop();
+		// Find all unused adjacent vertices
+        	for (size_t v = 0; v < n_vertices_; v++)
+	        {
 			if (graph_.at(u,v)!=0 &&  partite_[v]==-1)
-            {                
+        	        {                
 				partite_[v] = 1 - partite_[u];//set opposite partite
-                q.push(v);
-            }
+                		q.push(v);
+        	        }
 			else if (graph_.at(u,v) && partite_[v] == partite_[u])
-                return false;
+        			 return false;
 		}
 		if (q.empty())
 			for (size_t i = 0; i <n_vertices_; i++)
@@ -157,19 +157,18 @@ size_t BipartiteMatching::size()
 {
 	return matching_.size();
 }
-short BipartiteMatching::perfect()
+short BipartiteMatching::isPerfect()
 {
 	size_t l,r; l=0;r=0;
 	for (size_t i = 0; i < n_vertices_; i++)
 		if (partite_[i]==0) l++; else r++;
-	for(auto it=matching_.cbegin();it!=matching_.cend();++it)
-	{
-		l--;
-		r--;		
-	}
-	if ((r==0) && (l==0)) return 1;
-	else if (l==0) return 2;
-	else if (r==0) return 3;
+		
+	l-=size();
+	r-=size();
+	
+	if ((r==0) && (l==0)) return perfet_matching;
+	else if (l==0) return left_perfet_matching;
+	else if (r==0) return right_perfet_matching;
 	else return 0;
 
 }

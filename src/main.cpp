@@ -13,15 +13,15 @@ int main(int argc, char** argv){
 	bm.MaximumMatching();				
 	cout << "Matching for graph1:"<<endl;
 	bm.printMatching(std::cout);
-	switch (bm.perfect())
+	switch (bm.isPerfect())
 	{
-	    case 1: 
+	        case perfet_matching: 
 			cout << "Graph has perfet matching."<<endl;
 			break;
-		case 2: 
+		case left_perfet_matching: 
 			cout << "Graph has left-perfet matching."<<endl;
 			break;
-		case 3: 
+		case right_perfet_matching: 
 			cout << "Graph has right-perfet matching."<<endl;
 			break;
 
@@ -33,15 +33,15 @@ int main(int argc, char** argv){
 	bm.MaximumMatching();			
 	cout << "Matching for graph2:"<<endl;
 	bm.printMatching(std::cout);
-	switch (bm.perfect())
+	switch (bm.isPerfect())
 	{
-	    case 1: 
+	        case perfet_matching: 
 			cout << "Graph has perfet matching."<<endl;
 			break;
-		case 2: 
+		case left_perfet_matching: 
 			cout << "Graph has left-perfet matching."<<endl;
 			break;
-		case 3: 
+		case right_perfet_matching: 
 			cout << "Graph has right-perfet matching."<<endl;
 			break;
 
@@ -54,15 +54,15 @@ int main(int argc, char** argv){
 	bm.MaximumMatching();			
 	cout << "Matching for graph3:"<<endl;
 	bm.printMatching(std::cout);
-	switch (bm.perfect())
+	switch (bm.isPerfect())
 	{
-	    case 1: 
+	        case perfet_matching: 
 			cout << "Graph has perfet matching."<<endl;
 			break;
-		case 2: 
+		case left_perfet_matching: 
 			cout << "Graph has left-perfet matching."<<endl;
 			break;
-		case 3: 
+		case right_perfet_matching: 
 			cout << "Graph has right-perfet matching."<<endl;
 			break;
 	}
