@@ -162,11 +162,10 @@ short BipartiteMatching::isPerfect()
 	size_t l,r; l=0;r=0;
 	for (size_t i = 0; i < n_vertices_; i++)
 		if (partite_[i]==0) l++; else r++;
-	for(auto it=matching_.cbegin();it!=matching_.cend();++it)
-	{
-		l--;
-		r--;		
-	}
+		
+	l-=size();
+	r-=size();
+	
 	if ((r==0) && (l==0)) return perfet_matching;
 	else if (l==0) return left_perfet_matching;
 	else if (r==0) return right_perfet_matching;
