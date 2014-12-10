@@ -102,7 +102,6 @@ void MaximumFlow::increase(flow_network &fNet,std::vector<size_t>& path)
 				fNet[x].clear();
 			else
 			{
-				//edgeVector::iterator it=findEdge(x,y,fNet);
 				if (it1!=fNet[x].end())
 					fNet[x].erase(it1);
 			}
