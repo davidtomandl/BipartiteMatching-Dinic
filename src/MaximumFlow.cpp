@@ -153,9 +153,9 @@ void MaximumFlow::residualNetwork(flow_network& fNet)
 						fNet[i].clear();
 					else
 					{
-						edgeVector::iterator it=findEdge(i,v,fNet);
-						if (it!=fNet[i].end())
-							fNet[i].erase(it);
+						edgeVector::iterator it1=findEdge(i,v,fNet);
+						if (it1!=fNet[i].end())
+							fNet[i].erase(it1);
 					}
 					k--;
 				}
