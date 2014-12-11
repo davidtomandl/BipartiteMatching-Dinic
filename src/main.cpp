@@ -64,7 +64,8 @@ inline bool ifFileExists(const char* name) {
 }
 
 /*Reads command arguments.
-* Expected the names of an input file with a graph.
+* Expected the names of input files,
+* a file contains only one graph.
 * Format of the given file:
 	* an edge list 
 	* First number has to be number of vertices in the graph.
