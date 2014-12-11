@@ -30,13 +30,11 @@ public:
 	void setTarget(size_t t){target_=t;}
 	void setNumberOfVertices(size_t n){n_vertices_=n;}
 	
-	void setNetwork(double const *const *capacity);
-
 	// Adds directional edge with a capacity; from->to
 	void addEdge(size_t from, size_t to, double capacity); 
 	//finds the maximum flow in the given flow network
-	//returns adjacency list with flow
-	flow_network Dinic();
+	//return adjacency list with flow
+	const flow_network& Dinic();
 
 	
 private:
@@ -46,7 +44,7 @@ private:
 	//length of the shortest path in the flow network from the source to the target
 	//Returns if the target is reachable from the source. 
 	//Sets parameters "length" to the length of this path.
-	bool shortestPath(size_t & lenght,flow_network& lNet);
+	bool shortestPath(const flow_network& lNet);
 	//constructs the layered network based on the given residual network
 	void layeredNetwork(flow_network &);
 	//constructs the residual network based on the given flow network
@@ -56,12 +54,13 @@ private:
 	//finds blocking flow
 	void blockingFlow(flow_network & );
 
-	void init(flow_network& fNet,std::vector<size_t>& path);
-	void forward(flow_network& fNet,std::vector<size_t>& path);
-	void backward(flow_network& fNet,std::vector<size_t>& path);
-	void increase(flow_network& fNet,std::vector<size_t>& path);
+	//All these mathods need: layered network and vector with the actual angmenting path.
+	void init(flow_network& lNet,std::vector<size_t>& path);
+	void forward(flow_network& lNet,std::vector<size_t>& path);
+	void backward(flow_network& lNet,std::vector<size_t>& path);
+	void increase(flow_network& lNet,std::vector<size_t>& path);
 	
-	edgeVector::iterator findEdge(size_t u,size_t v,flow_network &fNet);
+	edgeVector::iterator findEdge(size_t u,size_t v,flow_network &lNet);
 };
 
 
