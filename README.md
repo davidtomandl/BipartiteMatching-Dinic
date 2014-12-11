@@ -22,3 +22,7 @@ Format of the given file:
 </UL>
 
 Thare is also default testing in case one of the arguments is <i> test </i> or argument count is eqeul to 1. The program ends.
+<h2>Compile</h2>
+<blockquote>
+g++ -std=c++0x main.cpp BipartiteMatching.cpp MaximumFlow.cpp -o BipartiteMatching
+</blockquote>
