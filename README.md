@@ -11,7 +11,7 @@ The library assumes correctly entered data.
 But basic things is checked  e.g. whether the  graph  is a bipartite?
 <h2>Default program.</h2>
 The program reads command arguments.
-Expected the names of input files with a graph. <br>
+Expected the names of input files, a file contains only one graph. <br>
 Format of the given file:
 <UL>
 	<LI>  an edge list 
