@@ -9,7 +9,7 @@ Download the source files and include header files in your project.
 Public methods and functions are described in the header files.
 The library assumes correctly entered data.
 But basic things is checked  e.g. whether the  graph  is a bipartite?
-<h2>Defalult program.</h2>
+<h2>Default program.</h2>
 The program reads command arguments.
 Expected the names of an input file with a graph.
 Format of the given file:
