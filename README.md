@@ -13,10 +13,12 @@ But basic things is checked  e.g. whether the  graph  is a bipartite?
 The program reads command arguments.
 Expected the names of an input file with a graph.
 Format of the given file:
-	-  an edge list 
-	-  First number has to be number of vertices in the graph.
-	-  Then followed by the vertex pair, which forms the edge.
-	-  Vertices are labeled as a non negative integer from 0 to n-1.
-	-  Vertices are separated by space.
+<UL>
+	<LI>  an edge list 
+ 	<LI>  First number has to be number of vertices in the graph.
+	<LI>  Then followed by the vertex pair, which forms the edge.
+	<LI>  Vertices are labeled as a non negative integer from 0 to n-1.
+	<LI> Vertices are separated by space.
+</UL>
 
 Thare is also default testing in case one of the argument is test  or argument count is eqeul to 1. The program ends.
