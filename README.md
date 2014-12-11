@@ -12,8 +12,9 @@ But basic things is checked  e.g. whether the  graph  is a bipartite?
 <h2>Default program.</h2>
 The program reads command arguments.
 Expected the names of an input file with a graph.
-Format of the given file:
+
 <UL>
+Format of the given file:
 	<LI>  an edge list 
  	<LI>  First number has to be number of vertices in the graph.
 	<LI>  Then followed by the vertex pair, which forms the edge.
