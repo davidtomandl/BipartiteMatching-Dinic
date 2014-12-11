@@ -21,4 +21,4 @@ Format of the given file:
 	<LI> Vertices are separated by space.
 </UL>
 
-Thare is also default testing in case one of the argument is test  or argument count is eqeul to 1. The program ends.
+Thare is also default testing in case one of the arguments is <i> test </i> or argument count is eqeul to 1. The program ends.
