@@ -16,7 +16,7 @@ void Test()
 	bm.printMatching(std::cout);
 	switch (bm.isPerfect())
 	{
-	    case perfet_matching: 
+	    	case perfet_matching: 
 			cout << "Graph has perfet matching."<<endl;
 			break;
 		case left_perfet_matching: 
@@ -34,20 +34,7 @@ void Test()
 	bm.MaximumMatching();			
 	cout << "Matching for graph2:"<<endl;
 	bm.printMatching(std::cout);
-	switch (bm.isPerfect())
-	{
-	    case perfet_matching: 
-			cout << "Graph has perfet matching."<<endl;
-			break;
-		case left_perfet_matching: 
-			cout << "Graph has left-perfet matching."<<endl;
-			break;
-		case right_perfet_matching: 
-			cout << "Graph has right-perfet matching."<<endl;
-			break;
 
-	}
-	
 	cout << endl;
 	
 	std::ifstream ifs3("Graphs/graph3.txt");
@@ -55,18 +42,6 @@ void Test()
 	bm.MaximumMatching();			
 	cout << "Matching for graph3:"<<endl;
 	bm.printMatching(std::cout);
-	switch (bm.isPerfect())
-	{
-	    case perfet_matching: 
-			cout << "Graph has perfet matching."<<endl;
-			break;
-		case left_perfet_matching: 
-			cout << "Graph has left-perfet matching."<<endl;
-			break;
-		case right_perfet_matching: 
-			cout << "Graph has right-perfet matching."<<endl;
-			break;
-	}
 	
 	cout << endl;
 	
@@ -98,7 +73,7 @@ inline bool ifFileExists(const char* name) {
 	* Vertices are separated by space.
 *
 * Thare is also default testing in case one of the argument is test 
-* or argument count is eqeul to 1. The program ends.
+* or argument count is eqeul to 1. Then the program ends.
 */
 int main(int argc, char** argv)
 {
