@@ -140,6 +140,7 @@ int main(int argc, char** argv)
 					}catch (const exception& e){
 						cout << "error: cannot read the given file "<<file_name<<endl;
 						cout << e.what()<<endl;
+						return 1;
 					}
 				}
 			}
