@@ -130,14 +130,15 @@ void MaximumFlow::addFlow(const flow_network & f )
 void MaximumFlow::residualNetwork(flow_network& lNet)
 {
 	size_t i=0;
-	for (flow_network::const_iterator it=net_.begin();it!=net_.end(); ++it)
+	size_t  size_net=net_.size();
+	for (;i<size_net;i++)
 	{
 		size_t j=0;
 		size_t k=0;
-		if (net_[i].size()>0)
+		size_t size=net_[i].size();
+		if (size>0)
 		{
-			const edgeVector copyVector = net_[i];
-			for (edgeVector::const_iterator it=copyVector.begin();it!=copyVector.end(); ++it)
+			for (;j<size;j++,k++)
 			{
 				double f=net_[i][j].flow;
 				double c=net_[i][j].capacity;
@@ -160,12 +161,9 @@ void MaximumFlow::residualNetwork(flow_network& lNet)
 							lNet[i].erase(it1);
 					}
 					k--;
-				}
-				k++;		
-				j++;
+				}				
 			}
-		}
-		i++;
+		}		
 	}
 
 
