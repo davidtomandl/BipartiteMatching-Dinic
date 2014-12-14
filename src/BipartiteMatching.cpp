@@ -169,5 +169,4 @@ short BipartiteMatching::isPerfect()
 	else if (l==0) return left_perfet_matching;
 	else if (r==0) return right_perfet_matching;
 	else return 0;
-
 }
