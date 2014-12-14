@@ -35,7 +35,6 @@ public:
 	//finds the maximum flow in the given flow network
 	//return adjacency list with flow
 	const flow_network& Dinic();
-
 	
 private:
 	size_t source_,target_;
