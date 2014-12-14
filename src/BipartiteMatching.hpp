@@ -81,7 +81,6 @@ public:
 	short isPerfect();
 	void setNumberOfVertices(size_t n){n_vertices_=n;}
 
-
 private:
 	size_t n_vertices_;
 	std::vector<short> partite_;
