@@ -94,7 +94,7 @@ int main(int argc, char** argv)
 			if(string(file_name) == "test") {
 				cout << "Default testing..."<<endl;
 				Test();
-				/*cout << "press enter to exit..."<<endl;//delete
+				/*cout << "press enter to exit..."<<endl;
 				getchar();	*/
 				return 0;			
 			} else

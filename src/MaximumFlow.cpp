@@ -20,54 +20,63 @@ const MaximumFlow::flow_network& MaximumFlow::Dinic()
 	}
 	return net_;
 }
+
 void MaximumFlow::blockingFlow(flow_network & fNet)
 {
-	std::vector<size_t> path;
-	init(fNet,path);
-}
-void MaximumFlow::init(flow_network& fNet,std::vector<size_t>& path)
-{
-	path.clear();
-	path.push_back(source_);
-	forward(fNet,path);
-}
+	bool exist_path=true; //path source_ -> target_
+	size_t x;
+	std::vector<size_t> path;	
 
-void MaximumFlow::forward(flow_network& lNet,std::vector<size_t>& path)
-{
-	size_t x=path.back();
-	if (lNet[x].size()==0) 
-		backward(lNet,path);
-	else
+	while (exist_path) 
 	{
-		size_t y=lNet[x][0].to;
-		path.push_back(y);
-		x=y;
-		if (y!=target_) forward(lNet,path);
-		else increase(lNet,path);
-	}
-}
+		path.clear();
+		x=source_;
+		path.push_back(x);
 
-void MaximumFlow::backward(flow_network& lNet,std::vector<size_t>& path)
-{
-	size_t x=path.back();
-	if (x!=source_) 
-	{
-		//Let (v,x) is the last edge in path.
-		path.pop_back(); //remove x from path
-		size_t v=path.back();
-		//remove edge (v,x) from the layered network
-		if (lNet[v].size()==1) 
-			lNet[v].clear();
-		else
+		while(true)
 		{
-			edgeVector::iterator it=findEdge(v,x,lNet);
-			if (it!=lNet[v].end())
-				lNet[v].erase(it);
+			if (fNet[x].size()==0) //can't go forward
+			{
+				//try to go backward
+				if (x!=source_) 
+				{
+					//Let (v,x) is the last edge in path.
+					path.pop_back(); //remove x from path
+					size_t v=path.back();
+					//remove edge (v,x) from the layered network
+					if (fNet[v].size()==1) 
+						fNet[v].clear();
+					else
+					{
+						edgeVector::iterator it=findEdge(v,x,fNet);
+						if (it!=fNet[v].end())
+							fNet[v].erase(it);
+					}	
+					x=v;
+				}
+				else //doesn't exist a path to target_ 
+				{
+					exist_path=false;
+					break;
+				}
+			}
+			else //go forward
+			{
+				size_t y=fNet[x][0].to;
+				path.push_back(y);
+				x=y;
+				if (y==target_) //found the path from source_ to target_
+				{
+				   increase(fNet,path);//upgrade the current flow
+				   break;              //try to find another path
+				}
+			}
 		}
-		forward(lNet,path);
 	}
+	
 }
 
+//increase the current flow base on the given augmenting path
 void MaximumFlow::increase(flow_network &lNet,std::vector<size_t>& path)
 {
 	double d=INT_MAX;
@@ -109,7 +118,7 @@ void MaximumFlow::increase(flow_network &lNet,std::vector<size_t>& path)
 			}
 		}
 	}
-	init(lNet,path);
+	
 }
 
 void MaximumFlow::addFlow(const flow_network & f )
