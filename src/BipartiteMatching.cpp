@@ -4,7 +4,7 @@ BipartiteMatching::edgeList BipartiteMatching::MaximumMatching()
 {
 	if (! setPartite()) 
 	{
-		throw "Graph is not a bipartite graph.";
+		throw bipartiteExeption();
 	}
 	MaximumFlow mf(n_vertices_+2,n_vertices_,n_vertices_+1);
 
