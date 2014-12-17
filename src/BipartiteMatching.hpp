@@ -41,6 +41,7 @@
 #include "MaximumFlow.hpp"
 #include <iostream>
 #include <fstream>
+#include <exception>
 
 #define perfet_matching 1
 #define left_perfet_matching 2
@@ -92,5 +93,12 @@ private:
 
 };
 
+class bipartiteExeption: public std::exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Graph is not a bipartite graph.";
+  }
+};
 
 #endif /* BipartiteMatching_hpp_ */
